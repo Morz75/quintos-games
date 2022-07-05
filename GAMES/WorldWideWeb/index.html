@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="author" content="quinton-ashley" />
+		<meta name="description" content="Example website." />
+		<title>09_WorldWideWeb</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<nav>
+			<div>
+				<img src="https://quinton-ashley.github.io/quintos/img/logo.png" />
+				<a id="homeLink" href="index.html">Time Tools</a>
+				<a href="index.html">StopWatch</a>
+				<a href="timer.html">Timer</a>
+				<a href="metronome.html">Metronome</a>
+			</div>
+			<div>
+				<input type="search" placeholder="search this site" />
+				<button type="submit">Search!</button>
+			</div>
+		</nav>
+		<article>
+			<div id="stopwatch">
+				<div>
+					<img src="img/Clock.gif" alt="" />
+				</div>
+				<div>
+					<h1>StopWatch</h1>
+					<h2 id="watch">00:00:000</h2>
+					<div id="buttons">
+						<button onclick="startTime()">Start</button>
+						<button onclick="stopTime()">Stop</button>
+						<button onclick="lapTime()">Lap</button>
+					</div>
+				</div>
+				<div id="laps"></div>
+			</div>
+		</article>
+		<footer>
+			Time Tools was created by Alex (<a href="https://github.com/quinton-ashley">@quinton-ashley</a>) ©2021-2022
+		</footer>
+		<script src="stopwatch.js"></script>
+	</body>
+</html>

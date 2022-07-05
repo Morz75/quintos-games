@@ -1,0 +1,65 @@
+html,
+body {
+	margin: 0;
+}
+nav {
+	display: flex;
+	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	background-color: white;
+}
+
+nav div {
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+nav #homeLink {
+	font-size: 30px;
+}
+nav img {
+	width: 40px;
+}
+
+article {
+	padding: 8px;
+	margin-top: 40px;
+}
+
+footer {
+	border: black dotted 0px;
+	border-top-width: 3px;
+	padding: 8px;
+}
+
+h1,
+#watch {
+	text-align: center;
+}
+
+#buttons {
+	display: flex;
+	justify-content: center;
+}
+
+#stopwatch {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#stopwatch > div {
+	width: 20%;
+}
+
+#watch,
+#laps {
+	font-family: monospace;
+}
+
+#laps {
+	font-size: x-large;
+}
