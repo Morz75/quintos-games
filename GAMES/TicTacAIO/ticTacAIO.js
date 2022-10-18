@@ -17,8 +17,6 @@ TTTTT  OOO   EEEE
   T   O   O  E
   T    OOO   EEEE`.slice(1);
 
-text(title, 5, 6);
-
 const bigSpace = '        \n'.repeat(7);
 
 const bigO = `
@@ -45,13 +43,6 @@ const gridCol = 26;
 let turnX = Math.random() < 0.5;
 let scoreX = 0;
 let scoreO = 0;
-
-/* PART A: finish the grid of 9x8 spaces */
-text('─'.repeat(26), gridRow + 7, gridCol);
-text('─'.repeat(26), gridRow + 15, gridCol); // draw another horizontal line
-
-text('│\n'.repeat(23), gridRow, gridCol + 8);
-text('│\n'.repeat(23), gridRow, gridCol + 17); // draw another vertical line
 
 let board = [
 	[' ', ' ', ' '],
@@ -153,8 +144,6 @@ function displayScore() {
 	text('O: ' + scoreO, 8, 60);
 }
 
-displayScore();
-
 function displayTurn() {
 	if (turnX) {
 		text("Player X it's your turn", 4, 60, 16);
@@ -163,15 +152,26 @@ function displayTurn() {
 	}
 }
 
-displayTurn();
+function start() {
+	displayTurn();
+	displayScore();
+	text(title, 5, 6);
 
-/* PART A: Make the buttons in the grid */
-// note the intervals! row += 8 and col += 9
+	/* PART A: finish the grid of 9x8 spaces */
+	text('─'.repeat(26), gridRow + 7, gridCol);
+	text('─'.repeat(26), gridRow + 15, gridCol); // draw another horizontal line
 
-for (let row = 0; row < 3; row++) {
-	for (let col = 0; col < 3; col++) {
-		button(bigSpace, gridRow + row * 8, gridCol + col * 9, () => {
-			takeTurn(row, col);
-		});
+	text('│\n'.repeat(23), gridRow, gridCol + 8);
+	text('│\n'.repeat(23), gridRow, gridCol + 17); // draw another vertical line
+
+	/* PART A: Make the buttons in the grid */
+	// note the intervals! row += 8 and col += 9
+
+	for (let row = 0; row < 3; row++) {
+		for (let col = 0; col < 3; col++) {
+			button(bigSpace, gridRow + row * 8, gridCol + col * 9, () => {
+				takeTurn(row, col);
+			});
+		}
 	}
 }
