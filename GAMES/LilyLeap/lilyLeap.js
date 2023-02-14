@@ -1,4 +1,4 @@
-let frog, lilypads;
+let frog, lilypads, bugs;
 
 let time = 10;
 let gameOver = false;
@@ -6,15 +6,30 @@ let gameOver = false;
 function preload() {
 	frog = new Sprite();
 	frog.addAni('frog_jump.png', { size: [32, 16], frames: 7 });
+
 	lilypads = new Group();
 	lilypads.addAni('lilypads.png', { size: [16, 16], frames: 12 });
+
+	bugs = new Group();
+	bugs.addImg(
+		spriteArt(`
+..0.
+.000..0
+.00000
+.0000.0
+..0 ..
+	 	`)
+	);
+	bugs.width = 2;
+	bugs.height = 7;
+	bugs.y = 80;
 }
 
 function setup() {
 	world.gravity.y = 10;
 	noStroke();
 
-	frog.x = 16;
+	frog.x = 0;
 	frog.y = 80;
 	frog.w = 10;
 	frog.h = 8;
@@ -29,20 +44,48 @@ function setup() {
 	lilypads.collider = 'static';
 
 	makeLilyPads();
+	makeBugs();
 
 	countdown();
+
+	frog.overlaps(bugs, eat);
+}
+function eat(frog, bug) {
+	bug.remove();
+	time = time + 4;
 }
 
 function makeLilyPads() {
 	/* Part A: Use a loop to make more lily pads. */
-	for (let i = 0; i < 50; i++) {
-		if (i != 1 && random() < 0.4) {
+	for (let i = 0; i < 200; i++) {
+		if (i != 0 && random() < 0.4) {
 			i++;
 		}
 		let lily = new lilypads.Sprite();
 		lily.x = i * 16;
 		lily.ani.frame = round(random(0, 11));
 		lily.ani.frameDelay = round(random(100, 200));
+	}
+}
+
+function makeBugs() {
+	let i = 4;
+	while (i < lilypads.length) {
+		let bug = new bugs.Sprite();
+		bug.x = lilypads[i].x;
+		if (i < 30) {
+			i += 8;
+		} else if (i < 50) {
+			i += 10;
+		} else if (i < 70) {
+			i += 12;
+		} else if (i < 90) {
+			i += 14;
+		} else if (i < 110) {
+			i += 16;
+		} else {
+			i += 18;
+		}
 	}
 }
 
@@ -89,13 +132,18 @@ function draw() {
 	if (frog.y > 400) {
 		restartGame();
 	}
+	if (frog.x == lilypads[lilypads.length - 1].x) {
+		text('You win! Refresh page for a new level.', 3, 1);
+	}
 }
 
 async function restartGame() {
 	gameOver = true;
+	bugs.removeAll();
+	makeBugs();
 
 	// reset frog position
-	frog.x = 16;
+	frog.x = 0;
 	frog.y = 84;
 	frog.vel.x = 0;
 	frog.vel.y = 0;
